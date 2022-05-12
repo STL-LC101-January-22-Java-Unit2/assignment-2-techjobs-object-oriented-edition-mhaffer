@@ -62,50 +62,26 @@ public class JobTest {
 
     @Test
     public void toStringBlankLines() {
-        testJob0 = new Job("Taste Tester", new Employer("Guy Fieri"), new Location("Flavortown"), new PositionType("Critical"), new CoreCompetency("Tastebuds"));
         assertEquals("\n" +
-                "ID: " + "" +
+                "ID: " + testJob0.getId() +
                 "\n" +
-                "Name: " + "Taste Tester" +
+                "Name: " + testJob0.getName() +
                 "\n" +
-                "Employer: " + "Guy Fieri" +
+                "Employer: " + testJob0.getEmployer() +
                 "\n" +
-                "Location: " + "Flavortown" +
+                "Location: " + testJob0.getLocation() +
                 "\n" +
-                "Position Type: " + "Critical" +
+                "Position Type: " + testJob0.getPositionType() +
                 "\n" +
-                "Core Competency: " + "Tastebuds" +
-                "\n", testJob0.toString());
-    }
-
-
-    @Test
-    public void toStringNewLines() {
-        testJob0 = new Job("Taste Tester", new Employer("Guy Fieri"), new Location("Flavortown"), new PositionType("Critical"), new CoreCompetency("Tastebuds"));
-        assertEquals("\n" +
-                "ID: " + "" +
-                "\n" +
-                "Name: " + "Taste Tester" +
-                "\n" +
-                "Employer: " + "Guy Fieri" +
-                "\n" +
-                "Location: " + "Flavortown" +
-                "\n" +
-                "Position Type: " + "Critical" +
-                "\n" +
-                "Core Competency: " + "Tastebuds" +
-                "\n", testJob0.toString());
+                "Core Competency: " + testJob0.getCoreCompetency() +
+                "\n",
+                testJob0.toString());
     }
 
         @Test
         public void toStringWhenEmpty() {
-            String s = testJob5.toString();
-            assertTrue(s.contains("Data not Available"));
-        }
-
-        @Test
-        public void toStringObjectHasIdOnly() {
-            assertEquals("OOPS! This job does not seem to exist.", testJob1.toString());
+            String testy = testJob0.toString();
+            assertTrue(testy.contains("Data not Available"));
         }
 
 
