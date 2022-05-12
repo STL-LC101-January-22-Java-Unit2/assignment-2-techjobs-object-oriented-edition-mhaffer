@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.oo.test;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -13,38 +14,99 @@ import static org.junit.Assert.*;
 @RunWith(JUnit4.class)
 public class JobTest {
 
+    Job testJob0, testJob1, testJob2, testJob3, testJob4, testJob5;
+    Employer testEmployer;
+    Location testLocation;
+    PositionType testPositionType;
+    CoreCompetency testCoreCompetency;
+
+    @Before
+    public void createTestJobs() {
+        testJob0 = new Job("Taste Tester", new Employer("Guy Fieri"), new Location("Flavortown"), new PositionType("Critical"), new CoreCompetency("Tastebuds"));
+        testJob1 = new Job();
+        testJob2 = new Job();
+        testEmployer = new Employer("ACME");
+        testLocation = new Location("Desert");
+        testPositionType = new PositionType("Quality Control");
+        testCoreCompetency = new CoreCompetency("Persistent");
+        testJob3 = new Job("Product tester", testEmployer, testLocation, testPositionType, testCoreCompetency);
+        testJob4 = new Job("Product tester", testEmployer, testLocation, testPositionType, testCoreCompetency);
+        testJob5 = new Job("Ice cream tester", new Employer(""), new Location("Home"), new PositionType("UX"), new CoreCompetency("Tasting ability"));
+
+    }
+
     @Test
     public void testSettingJobId() {
-        Job testJob1 = new Job("Junior Developer", new Employer("Boeing"), new Location("St. Louis"), new PositionType("Backend"), new CoreCompetency("Patience"));
-        Job testJob2 = new Job("Senior Developer", new Employer("Google"), new Location("Silicon Valley"), new PositionType("Frontend"), new CoreCompetency("Team Player"));
-        assertTrue(testJob1.getId() != testJob2.getId() );
+        assertEquals(1, testJob2.getId() - testJob1.getId());
     }
 
     @Test
     public void testJobConstructorSetsAllFields() {
-        Job testJob3 = new Job("Product Tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        assertEquals(3, testJob3.getId());
-
         assertTrue(testJob3.getName() instanceof String);
-        assertEquals("Product Tester", testJob3.getName());
-
         assertTrue(testJob3.getEmployer() instanceof Employer);
-        assertEquals("ACME", testJob3.getEmployer().getValue());
-
         assertTrue(testJob3.getLocation() instanceof Location);
-        assertEquals("Desert", testJob3.getLocation().getValue());
-
         assertTrue(testJob3.getPositionType() instanceof PositionType);
-        assertEquals("Quality control", testJob3.getPositionType().getValue());
-
         assertTrue(testJob3.getCoreCompetency() instanceof CoreCompetency);
-        assertEquals("Persistence", testJob3.getCoreCompetency().getValue());
+
+        assertEquals("Product tester", testJob3.getName());
+        assertEquals(testEmployer, testJob3.getEmployer());
+        assertEquals(testLocation, testJob3.getLocation());
+        assertEquals(testPositionType, testJob3.getPositionType());
+        assertEquals(testCoreCompetency, testJob3.getCoreCompetency());
     }
 
     @Test
-    public void testJobsForEquality(){
-        Job testJob4 = new Job("Junior Developer", new Employer("Facebook"), new Location("Silicon Valley"), new PositionType("Front End"), new CoreCompetency("Spunk"));
-        Job testJob5 = new Job("Junior Developer", new Employer("Facebook"), new Location("Silicon Valley"), new PositionType("Front End"), new CoreCompetency("Spunk"));
-        assertFalse(testJob4.equals(testJob5));
+    public void testJobsForEquality() {
+        assertFalse(testJob3.equals(testJob4));
     }
+
+    @Test
+    public void toStringBlankLines() {
+        testJob0 = new Job("Taste Tester", new Employer("Guy Fieri"), new Location("Flavortown"), new PositionType("Critical"), new CoreCompetency("Tastebuds"));
+        assertEquals("\n" +
+                "ID: " + "" +
+                "\n" +
+                "Name: " + "Taste Tester" +
+                "\n" +
+                "Employer: " + "Guy Fieri" +
+                "\n" +
+                "Location: " + "Flavortown" +
+                "\n" +
+                "Position Type: " + "Critical" +
+                "\n" +
+                "Core Competency: " + "Tastebuds" +
+                "\n", testJob0.toString());
+    }
+
+
+    @Test
+    public void toStringNewLines() {
+        testJob0 = new Job("Taste Tester", new Employer("Guy Fieri"), new Location("Flavortown"), new PositionType("Critical"), new CoreCompetency("Tastebuds"));
+        assertEquals("\n" +
+                "ID: " + "" +
+                "\n" +
+                "Name: " + "Taste Tester" +
+                "\n" +
+                "Employer: " + "Guy Fieri" +
+                "\n" +
+                "Location: " + "Flavortown" +
+                "\n" +
+                "Position Type: " + "Critical" +
+                "\n" +
+                "Core Competency: " + "Tastebuds" +
+                "\n", testJob0.toString());
+    }
+
+        @Test
+        public void toStringWhenEmpty() {
+            String s = testJob5.toString();
+            assertTrue(s.contains("Data not Available"));
+        }
+
+        @Test
+        public void toStringObjectHasIdOnly() {
+            assertEquals("OOPS! This job does not seem to exist.", testJob1.toString());
+        }
+
+
 }
