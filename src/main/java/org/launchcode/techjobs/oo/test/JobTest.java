@@ -61,7 +61,7 @@ public class JobTest {
     }
 
     @Test
-    public void toStringBlankLines() {
+    public void toStringWithBlankLines() {
         assertEquals("\n" +
                 "ID: " + testJob0.getId() +
                 "\n" +
