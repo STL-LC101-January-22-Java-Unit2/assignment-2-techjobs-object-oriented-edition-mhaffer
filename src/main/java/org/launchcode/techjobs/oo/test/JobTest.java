@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.oo.test;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,29 +61,40 @@ public class JobTest {
         assertFalse(testJob3.equals(testJob4));
     }
 
+
     @Test
-    public void toStringWithBlankLines() {
+    public void toStringStartsAndEndsWithBlankLine(){
+        Job testJob5 = new Job("Ice cream tester", new Employer(""), new Location("Home"),
+                new PositionType("UX"), new CoreCompetency("Tasting ability"));
         assertEquals("\n" +
-                "ID: " + testJob0.getId() +
+                "ID: 5" +
                 "\n" +
-                "Name: " + testJob0.getName() +
+                "Name: " + "Ice cream taster"+
                 "\n" +
-                "Employer: " + testJob0.getEmployer() +
+                "Employer: " + "" +
                 "\n" +
-                "Location: " + testJob0.getLocation() +
+                "Location: " + "Home" +
                 "\n" +
-                "Position Type: " + testJob0.getPositionType() +
+                "Position Type: " + "UX" +
                 "\n" +
-                "Core Competency: " + testJob0.getCoreCompetency() +
-                "\n",
-                testJob0.toString());
+                "Core Competency: " + "Tasting ability" +
+                "\n", testJob5.toString());
     }
 
-        @Test
-        public void toStringWhenEmpty() {
-            String testy = testJob0.toString();
-            assertTrue(testy.contains("Data not Available"));
-        }
+
+    @Test
+    public void testToStringHandlesEmptyField(){
+        assertEquals("\nID: " + testJob3.getId() +
+                "\nName: " + testJob5.getName() +
+                "\nEmployer: " + testJob5.getEmployer() +
+                "\nLocation: " + testJob5.getLocation() +
+                "\nPosition Type: " + testJob5.getPositionType() +
+                "\nCore Competency: " + testJob5.getCoreCompetency() +
+                "\n", testJob5.toString());
+
+        assertTrue(testJob3.toString().contains("Name: Data not available"));
+    }
+
 
 
 }
