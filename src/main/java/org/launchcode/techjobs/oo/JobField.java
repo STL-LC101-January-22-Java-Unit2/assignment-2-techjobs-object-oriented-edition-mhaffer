@@ -7,35 +7,43 @@ public abstract class JobField {
     private static int nextId = 1;
     private String value;
 
+
+
     public JobField() {
         id = nextId;
         nextId++;
     }
+
 
     public JobField(String value) {
         this();
         this.value = value;
     }
 
+
+
     @Override
     public String toString() {
         return value;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof JobField)) return false;
-        JobField jobField = (JobField) o;
-        return getId() == jobField.getId();
+        if (o == null || getClass() != o.getClass()) return false;
+        JobField that = (JobField) o;
+        return getId() == that.getId();
     }
+
 
     @Override
     public int hashCode() {
         return Objects.hash(getId());
     }
 
-    // Getters and Setters:
+
 
     public int getId() {
         return id;

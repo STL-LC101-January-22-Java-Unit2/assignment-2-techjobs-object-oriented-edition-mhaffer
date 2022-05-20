@@ -25,7 +25,6 @@ public class JobTest {
         testJob2 = new Job();
     }
 
-
     @Test
     public void testSettingJobId() {
         testJob1 = new Job();
@@ -33,27 +32,10 @@ public class JobTest {
         Assert.assertFalse(testJob1.getId() == testJob2.getId());
     }
 
-
-    @Test
-    public void testSettingJobIdIncrementCorrectly() {
-        testJob1 = new Job();
-        testJob2 = new Job();
-        Assert.assertTrue(testJob2.getId() > testJob1.getId());
-    }
-
-    @Test
-    public void testSettingJobIdIncrementsByOne() {
-        testJob1 = new Job();
-        testJob2 = new Job();
-        Assert.assertEquals(1, testJob1.getId(), .001);
-        Assert.assertEquals(2, testJob2.getId(), .001);
-    }
-
     @Test
     public void testJobConstructorSetsAllFields() {
         Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
                 new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        //use assert statements to test constructor assigns the class and value of each field
         Employer employer = new Employer("ACME");
         Location location = new Location("Desert");
         PositionType position = new PositionType("Quality control");
@@ -72,7 +54,6 @@ public class JobTest {
         Assert.assertEquals("Persistence", testJob.getCoreCompetency().getValue());
     }
 
-
     @Test
     public void testJobsForEquality() {
         Job oneJob = new Job("Web Developer", new Employer("LaunchCode"), new Location("St. Louis"),
@@ -83,22 +64,18 @@ public class JobTest {
 
     }
 
-
-
     @Test
     public void testToStringStartsAndEndsWithNewLine() {
-        Job anotherJob = new Job("Ice cream tester", new Employer(""), new Location("Home"),
+        Job jobbyJob = new Job("Ice cream tester", new Employer(""), new Location("Home"),
                 new PositionType("UX"), new CoreCompetency("Tasting ability"));
-        String dataInfo = "ID: 7\nName: Ice cream tester\nEmployer: \nLocation: Home" +
+        String data = "ID: 7\nName: Ice cream tester\nEmployer: \nLocation: Home" +
                 "\nPosition Type: UX\nCore Competency: Tasting ability";
-        char firstChar = anotherJob.toString().charAt(0);
-        char lastChar = anotherJob.toString().charAt(anotherJob.toString().length()-1);
-        Assert.assertEquals('\n' + dataInfo + '\n', anotherJob.toString());
+        char firstChar = jobbyJob.toString().charAt(0);
+        char lastChar = jobbyJob.toString().charAt(jobbyJob.toString().length()-1);
+        Assert.assertEquals('\n' + data + '\n', jobbyJob.toString());
         Assert.assertEquals(firstChar, '\n');
         Assert.assertEquals(lastChar, '\n');
     }
-
-
 
     @Test
     public void testToStringContainsCorrectLabelsAndData() {
@@ -107,16 +84,17 @@ public class JobTest {
         String expected = "\nID: 6\nName: Product tester\nEmployer: ACME\nLocation: Desert" +
                 "\nPosition Type: Quality control\nCore Competency: Persistence\n";
         Assert.assertEquals(expected, testJob.toString());
+        System.out.println(testJob);
     }
 
 
     @Test
     public void testToStringHandlesEmptyField() {
-        Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
+        Job anotherTestJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
                 new PositionType("Quality control"), new CoreCompetency("Persistence"));
         String expected = "\nID: 5\nName: Product tester\nEmployer: ACME\nLocation: Desert" +
                 "\nPosition Type: Quality control\nCore Competency: Persistence\n";
-        Assert.assertEquals(expected, testJob.toString());
+        Assert.assertEquals(expected, anotherTestJob.toString());
     }
 
 }
