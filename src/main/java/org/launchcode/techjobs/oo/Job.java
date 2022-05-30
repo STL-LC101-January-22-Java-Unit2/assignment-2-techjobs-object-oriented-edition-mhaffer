@@ -27,99 +27,54 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Job)) return false;
         Job job = (Job) o;
-        return id == job.id && Objects.equals(name, job.name) && Objects.equals(employer, job.employer) && Objects.equals(location, job.location) && Objects.equals(positionType, job.positionType) && Objects.equals(coreCompetency, job.coreCompetency);
+        return getId() == job.getId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, employer, location, positionType, coreCompetency);
+        return Objects.hash(getId());
     }
-
-    @Override
-    public String toString() {
-
-
-        if (name == "") {
-            setName("Data not available");
-        }
-        if (Job.this.employer.getValue().equals("")) {
-            this.employer.setValue("Data not available");
-        }
-        if(Job.this.location.getValue().equals("")) {
-            this.location.setValue("Data not available");
-        }
-        if(Job.this.positionType.getValue().equals("")) {
-            this.positionType.setValue("Data not available");
-        }
-        if(Job.this.coreCompetency.getValue().equals("")) {
-            this.coreCompetency.setValue("Data not available");
-        }
-
-
-        return  "\n" +
-                "ID: " + id +
-                "\nName: " + name +
-                "\nEmployer: " + employer +
-                "\nLocation: " + location +
-                "\nPosition Type: " + positionType +
-                "\nCore Competency: " + coreCompetency +
-                "\n";
-    }
-
-
-
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
 
+    public String getName() {return name;}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) {this.name = name;}
 
-    public void setEmployer(Employer employer) {
-        this.employer = employer;
-    }
+    public Employer getEmployer() {return employer;}
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+    public void setEmployer(Employer employer) {this.employer = employer;}
 
-    public void setPositionType(PositionType positionType) {
-        this.positionType = positionType;
-    }
+    public Location getLocation() {return location;}
 
-    public void setCoreCompetency(CoreCompetency coreCompetency) {
-        this.coreCompetency = coreCompetency;
-    }
+    public void setLocation(Location location) {this.location = location;}
 
-    public int getId() {
-        return id;
-    }
+    public PositionType getPositionType() {return positionType;}
 
-    public String getName() {
-        return name;
-    }
+    public void setPositionType(PositionType positionType) {this.positionType = positionType;}
 
-    public Employer getEmployer() {
-        return employer;
-    }
+    public CoreCompetency getCoreCompetency() {return coreCompetency;}
 
-    public Location getLocation() {
-        return location;
-    }
+    public void setCoreCompetency(CoreCompetency coreCompetency) {this.coreCompetency = coreCompetency;}
 
-    public PositionType getPositionType() {
-        return positionType;
-    }
+    public int getId() {return id;}
 
-    public CoreCompetency getCoreCompetency() {
-        return coreCompetency;
+    @Override
+    public String toString(){
+        boolean isLocationEmpty = getLocation().getValue().equals("");
+        return "\n" +
+                "ID: " + getId() + "\n" +
+                "Name: " + (getName().equals("")?"Data not available":getName()) + "\n" +
+                "Employer: " + (getEmployer().getValue().equals("")?"Data not available":getEmployer()) + "\n" +
+                "Location: " +  (getLocation().getValue().equals("")?"Data not available":getLocation()) + "\n" +
+                "Position Type: " +  (getPositionType().getValue().equals("")?"Data not available":getPositionType()) + "\n" +
+                "Core Competency: " + (getCoreCompetency().getValue().equals("")?"Data not available":getCoreCompetency())
+                + "\n";
     }
 }
